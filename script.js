@@ -15,7 +15,6 @@ let stopped = 0;
 let history = [];
 let lostRow = -1;
 
-// Raccourci pour sélectionner un élément HTML
 const $ = id => document.getElementById(id);
 
 // Génération du plateau : 4 pommes et 1 piège par ligne
@@ -38,7 +37,6 @@ function newGame() {
     "Choisis une case pour trouver une pomme !";
 
   $("cashOut").disabled = true;
-
   render();
 }
 
@@ -50,7 +48,6 @@ function render() {
   for (let r = ROWS - 1; r >= 0; r--) {
     for (let c = 0; c < COLS; c++) {
       const btn = document.createElement("button");
-
       btn.className = "cell";
 
       const revealed = r < level || r === lostRow;
@@ -59,12 +56,10 @@ function render() {
         btn.textContent = board[r][c] ? "🍏" : "💣";
         btn.classList.add(board[r][c] ? "safe" : "trap");
         btn.disabled = true;
-
       } else if (r === level && active) {
         btn.textContent = "❔";
         btn.disabled = selected;
         btn.onclick = () => choose(c);
-
       } else {
         btn.textContent = "·";
         btn.disabled = true;
@@ -98,10 +93,9 @@ function choose(col) {
   }
 
   $("message").textContent =
-    "🍏 Bravo ! Pomme trouvée. Continue ou encaisse.";
+    "🍏 Bravo ! Pomme trouvée. Continue ou arrête la partie.";
 
   $("cashOut").disabled = false;
-
   render();
 }
 
@@ -112,13 +106,10 @@ function finish(won) {
 
   if (won) {
     wins++;
-
     $("message").textContent =
       "🏆 Félicitations ! Tu as terminé les 10 niveaux.";
-
   } else {
     losses++;
-
     $("message").textContent =
       "💣 Piège ! Partie terminée.";
   }
@@ -126,7 +117,6 @@ function finish(won) {
   $("cashOut").disabled = true;
 
   const result = won ? "Victoire 🍏" : "Défaite 💣";
-
   history.unshift(`${result} — ${level}/10 niveaux`);
 
   history = history.slice(0, 30);
@@ -136,7 +126,7 @@ function finish(won) {
   render();
 }
 
-// Encaisser sans déclarer une victoire complète
+// Arrêter volontairement une partie
 function cashOut() {
   if (!active || level === 0) return;
 
@@ -145,12 +135,12 @@ function cashOut() {
   stopped++;
 
   $("message").textContent =
-    "🏆 Partie arrêtée volontairement. Gain sécurisé dans la simulation.";
+    `Partie arrêtée volontairement — niveau atteint : ${level}/10.`;
 
   $("cashOut").disabled = true;
 
   history.unshift(
-    `Arrêt volontaire 🏆 — ${level}/10 niveaux`
+    `Arrêt volontaire — ${level}/10 niveaux`
   );
 
   history = history.slice(0, 30);
@@ -167,7 +157,6 @@ function updateStats() {
   $("losses").textContent = losses;
 
   const rate = games ? (wins / games * 100) : 0;
-
   $("rate").textContent = rate.toFixed(1) + "%";
 }
 
@@ -200,8 +189,7 @@ function showProbabilities() {
       <div class="prob-row">
         Niveau ${i} : <b>${probability.toFixed(2)}%</b>
         <div class="bar">
-          <div class="fill"
-               style="width:${probability}%"></div>
+          <div class="fill" style="width:${probability}%"></div>
         </div>
       </div>`;
   }
@@ -248,8 +236,7 @@ function simulate() {
       <div class="chart-row">
         Niveau ${r + 1} : ${percentage.toFixed(2)}%
         <div class="bar">
-          <div class="fill"
-               style="width:${percentage}%"></div>
+          <div class="fill" style="width:${percentage}%"></div>
         </div>
       </div>`;
   }
