@@ -1,0 +1,48 @@
+Index.html : <div class="app">
+  <header>
+    <div class="logo">🍏</div>
+    <h1>APPLE FORTUNE</h1>
+    <p>SIMULATEUR & ANALYSE STATISTIQUE</p>
+    <span class="demo">MODE GRATUIT · DÉMO</span>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><small>PARTIES</small><strong id="games">0</strong></div>
+    <div class="stat"><small>VICTOIRES</small><strong id="wins">0</strong></div>
+    <div class="stat"><small>DÉFAITES</small><strong id="losses">0</strong></div>
+    <div class="stat"><small>RÉUSSITE</small><strong id="rate">0%</strong></div>
+  </section>
+
+  <section class="panel">
+    <h2>🍀 Zone de jeu</h2>
+    <p id="message">Appuie sur Nouvelle partie pour commencer.</p>
+    <div id="level">Niveau 0 / 10</div>
+    <div id="grid" class="game-grid"></div>
+    <button id="newGame">🎮 NOUVELLE PARTIE</button>
+    <button id="cashOut" class="secondary" disabled>🏆 ARRÊTER ET GAGNER</button>
+  </section>
+
+  <section class="panel">
+    <h2>📊 Simulations automatiques</h2>
+    <p>Simule des parties indépendantes pour observer les probabilités.</p>
+    <button id="simulate">⚡ LANCER 10 000 SIMULATIONS</button>
+    <div class="simulation-results">
+      <div>Parties simulées<strong id="simGames">0</strong></div>
+      <div>Réussite des 10 niveaux<strong id="simRate">0%</strong></div>
+    </div>
+    <div id="levelsChart"></div>
+  </section>
+
+  <section class="panel">
+    <h2>📈 Probabilités théoriques</h2>
+    <p>Chance de trouver uniquement des pommes sûres à chaque niveau.</p>
+    <div id="probabilities"></div>
+  </section>
+
+  <section class="panel">
+    <h2>📜 Historique</h2>
+    <ol id="history"><li>Aucune partie enregistrée.</li></ol>
+  </section>
+
+  <footer>Simulation aléatoire indépendante · Aucun lien avec les serveurs 1xBet.</footer>
+</div>
